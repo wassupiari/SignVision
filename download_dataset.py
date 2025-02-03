@@ -4,7 +4,7 @@ import shutil
 import zipfile
 from sklearn.model_selection import train_test_split
 
-# Percorso della cartella dove sta il file ZIP
+# Percorso della cartella del file ZIP
 dataset_zip = "archive.zip"
 extract_path = "datasets/fer2013"
 
