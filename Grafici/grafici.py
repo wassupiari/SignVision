@@ -5,8 +5,8 @@ import seaborn as sns
 import numpy as np
 
 # 🔹 Imposta i percorsi delle cartelle del dataset
-dataset_path = "datasets/fer2013/custom_train"
-test_path = "datasets/fer2013/custom_test"
+dataset_path = "datasets/fer2013/train"
+test_path = "datasets/fer2013/test"
 output_path = "Grafici"  # Cartella dove salvare i grafici
 os.makedirs(output_path, exist_ok=True)  # Crea la cartella se non esiste
 
