@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
 
-# 🔹 Imposta i percorsi delle cartelle del dataset
+# Imposta i percorsi delle cartelle del dataset
 dataset_path = "datasets/fer2013/custom_train"
 test_path = "datasets/fer2013/custom_test"
 output_path = "Grafici"  # Cartella dove salvare i grafici
@@ -23,17 +23,17 @@ def count_images_per_class(dataset_path):
             total_images += num_images
     return class_counts, total_images
 
-# 🔹 Conta le immagini per training, test e totale
+# Conta le immagini per training, test e totale
 train_counts, train_total = count_images_per_class(dataset_path)
 test_counts, test_total = count_images_per_class(test_path)
 
-# 🔹 Calcola la somma delle immagini per ogni classe (Train + Test)
+# Calcola la somma delle immagini per ogni classe (Train + Test)
 total_counts = {class_name: train_counts.get(class_name, 0) + test_counts.get(class_name, 0) for class_name in set(train_counts) | set(test_counts)}
 all_total = sum(total_counts.values())
 
-print(f"🔹 Totale immagini nel Training Set: {train_total}")
-print(f"🔹 Totale immagini nel Test Set: {test_total}")
-print(f"🔹 Totale immagini nel Dataset: {all_total}")
+print(f" Totale immagini nel Training Set: {train_total}")
+print(f" Totale immagini nel Test Set: {test_total}")
+print(f" Totale immagini nel Dataset: {all_total}")
 
 def plot_distribution(counts, title, filename):
     """Genera e salva il grafico della distribuzione delle classi con etichette sopra le barre"""
@@ -53,16 +53,16 @@ def plot_distribution(counts, title, filename):
     plt.savefig(os.path.join(output_path, filename))  # Salva il grafico
     plt.show()
 
-# 🔹 Grafico distribuzione per Training Set
+#  Grafico distribuzione per Training Set
 plot_distribution(train_counts, "Distribuzione delle immagini per classe (Train)", "distribuzione_classi_train.png")
 
-# 🔹 Grafico distribuzione per Test Set
+#  Grafico distribuzione per Test Set
 plot_distribution(test_counts, "Distribuzione delle immagini per classe (Test)", "distribuzione_classi_test.png")
 
-# 🔹 Grafico distribuzione totale (Train + Test)
+#  Grafico distribuzione totale (Train + Test)
 plot_distribution(total_counts, "Distribuzione totale delle immagini per classe (Train + Test)", "distribuzione_classi_totale.png")
 
-# 🔹 Mostra e salva alcune immagini campione
+#  Mostra e salva alcune immagini campione
 fig, axes = plt.subplots(2, 5, figsize=(12, 5))
 classes = list(train_counts.keys())
 
@@ -79,7 +79,7 @@ for i, ax in enumerate(axes.flat):
 
 plt.tight_layout()
 
-# 🔹 Salva il grafico delle immagini campione
+#  Salva il grafico delle immagini campione
 plt.savefig(os.path.join(output_path, "esempio_immagini.png"))
 plt.show()
 
