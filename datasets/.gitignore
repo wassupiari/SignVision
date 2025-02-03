@@ -1,0 +1,33 @@
+# Escludi l'ambiente virtuale
+venv/
+.env/
+.venv/
+
+# Escludi file di cache e compilati di Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Escludi dataset di grandi dimensioni (opzionale, se non vuoi caricare il dataset)
+datasets/
+*.zip
+*.tar.gz
+
+# Escludi file di configurazione e log temporanei
+*.log
+*.sqlite3
+.DS_Store
+.vscode/
+.idea/
+
+# Escludi dipendenze installate automaticamente
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Escludi risultati di training (se hai modelli salvati)
+models/
+checkpoints/
+*.h5
+*.pth
+*.ckpt
