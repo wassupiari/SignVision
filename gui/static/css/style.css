@@ -1,0 +1,63 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-image: url(gui/static/immagini/1445_V.jpg);
+    background-size: cover;
+    background-position: center;
+    text-align: center;
+    color: white;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 500px;
+    margin: 50px auto;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.1);
+}
+
+h1 {
+    color: #FFD700;
+}
+
+p {
+    font-size: 1.1em;
+}
+
+input[type="file"] {
+    margin: 10px 0;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+button {
+    background-color: #ff4500;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1em;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background-color: #ff6347;
+}
+
+img {
+    max-width: 100%;
+    margin-top: 20px;
+    border-radius: 5px;
+    border: 2px solid #FFD700;
+}
+
+.prediction {
+    font-size: 1.4em;
+    font-weight: bold;
+    color: #FFD700;
+    margin-top: 15px;
+}

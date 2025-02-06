@@ -11,7 +11,7 @@ dir = "../MoodRipple/gtsrb-german-traffic-sign"
 test_labels_path = "../MoodRipple/gtsrb-german-traffic-sign/Test.csv"
 train_labels_path = "../MoodRipple/gtsrb-german-traffic-sign/Train.csv"
 img_size = (30, 30)
-epochs = 15
+epochs = 5
 batch_size = 32
 model_save_path = "models/traffic_signs_model_v3.h5"
 
