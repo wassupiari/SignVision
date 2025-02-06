@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traffic Sign Recognition</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        .container { margin-top: 50px; }
+        img { max-width: 300px; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Carica un'immagine per la classificazione del segnale stradale</h2>
+        <form action="/" method="post" enctype="multipart/form-data">
+            <input type="file" name="file" required>
+            <button type="submit">Carica e Predici</button>
+        </form>
+
+        {% if image %}
+            <h3>Immagine Caricata:</h3>
+            <img src="{{ image }}" alt="Uploaded Image">
+            <h3>{{ prediction }}</h3>
+        {% endif %}
+    </div>
+</body>
+</html>
