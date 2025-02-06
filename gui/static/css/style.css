@@ -1,6 +1,6 @@
 body {
     font-family: 'Arial', sans-serif;
-    background-image: url(gui/static/immagini/1445_V.jpg);
+    background-image: url(immagini/1445_V.jpg);
     background-size: cover;
     background-position: center;
     text-align: center;
@@ -27,6 +27,7 @@ p {
 }
 
 input[type="file"] {
+    color: #000000;
     margin: 10px 0;
     padding: 10px;
     background-color: #fff;

@@ -24,18 +24,15 @@
         <p>Carica un'immagine di un segnale stradale per ottenere una classificazione automatica.</p>
 
         <form action="/" method="post" enctype="multipart/form-data">
-            <input type="file" name="file" accept="image/*" onchange="previewImage(event)" required>
-            <br>
-            <img id="imagePreview" style="display:none; max-width: 300px; margin-top: 10px;" alt="Anteprima immagine">
-            <br>
+            <input type="file" name="file" accept="image/*" required>
             <button type="submit">🔍 Analizza Segnale</button>
         </form>
 
         {% if image %}
-            <h3>Segnale Caricato:</h3>
-            <img src="{{ image }}" alt="Segnale Stradale">
-            <p class="prediction">🛑 {{ prediction }} 🚦</p>
-        {% endif %}
+    <h3>Segnale Caricato:</h3>
+    <img src="{{ image }}" alt="Segnale Stradale">
+    <p class="prediction">🛑 {{ prediction }} 🚦</p>
+{% endif %}
     </div>
 </body>
 </html>
