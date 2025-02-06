@@ -27,7 +27,7 @@ classes = {
 
 # Configurazione di Flask
 app = Flask(__name__)
-UPLOAD_FOLDER = "static/uploads"
+UPLOAD_FOLDER = "gui/static/uploads"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 

@@ -5,13 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Riconoscimento Segnali Stradali</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <!-- codice per la visualizzazione della foto in preview -->
+    <script>
+        function previewImage(event) {
+            var reader = new FileReader();
+            reader.onload = function() {
+                var output = document.getElementById('imagePreview');
+                output.src = reader.result;
+                output.style.display = 'block';
+            }
+            reader.readAsDataURL(event.target.files[0]);
+        }
+    </script>
 </head>
 <body>
     <div class="container">
         <h1>🚗 Riconoscimento Segnali Stradali 🛣️</h1>
         <p>Carica un'immagine di un segnale stradale per ottenere una classificazione automatica.</p>
+
         <form action="/" method="post" enctype="multipart/form-data">
-            <input type="file" name="file" required>
+            <input type="file" name="file" accept="image/*" onchange="previewImage(event)" required>
+            <br>
+            <img id="imagePreview" style="display:none; max-width: 300px; margin-top: 10px;" alt="Anteprima immagine">
+            <br>
             <button type="submit">🔍 Analizza Segnale</button>
         </form>
 
