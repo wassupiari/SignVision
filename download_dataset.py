@@ -1,6 +1,9 @@
-import kagglehub
+import opendatasets as od
 
-# Download latest version
-path = kagglehub.dataset_download("meowmeowmeowmeowmeow/gtsrb-german-traffic-sign")
+# Link del dataset su Kaggle
+dataset_url = "https://www.kaggle.com/datasets/meowmeowmeowmeowmeow/gtsrb-german-traffic-sign"
 
-print("Path to dataset files:", path)
+# Scaricare il dataset
+od.download(dataset_url)
+
+print("Download completato!")
