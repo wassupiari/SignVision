@@ -1,27 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Traffic Sign Recognition</title>
-    <style>
-        body { font-family: Arial, sans-serif; text-align: center; }
-        .container { margin-top: 50px; }
-        img { max-width: 300px; margin-top: 20px; }
-    </style>
+    <title>Riconoscimento Segnali Stradali</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
     <div class="container">
-        <h2>Carica un'immagine per la classificazione del segnale stradale</h2>
+        <h1>🚗 Riconoscimento Segnali Stradali 🛣️</h1>
+        <p>Carica un'immagine di un segnale stradale per ottenere una classificazione automatica.</p>
         <form action="/" method="post" enctype="multipart/form-data">
             <input type="file" name="file" required>
-            <button type="submit">Carica e Predici</button>
+            <button type="submit">🔍 Analizza Segnale</button>
         </form>
 
         {% if image %}
-            <h3>Immagine Caricata:</h3>
-            <img src="{{ image }}" alt="Uploaded Image">
-            <h3>{{ prediction }}</h3>
+            <h3>Segnale Caricato:</h3>
+            <img src="{{ image }}" alt="Segnale Stradale">
+            <p class="prediction">🛑 {{ prediction }} 🚦</p>
         {% endif %}
     </div>
 </body>
