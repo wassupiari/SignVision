@@ -30,6 +30,6 @@ def predict_image(model_path, image_path, img_size=(30, 30)):
 # Esempio di utilizzo
 if __name__ == "__main__":
     model_path = "models/traffic_signs_model.h5"
-    image_path = "test_image.png"  # Modifica con il percorso dell'immagine
+    image_path = "img_2.png"  # Modifica con il percorso dell'immagine
     prediction, confidence = predict_image(model_path, image_path)
     print(f"Predizione: {prediction} con confidenza {confidence:.2f}")

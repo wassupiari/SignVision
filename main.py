@@ -11,9 +11,9 @@ test_data_path = "../MoodRipple"
 test_labels_path = "Dataset/Test.csv"
 train_labels_path = "Dataset/Train.csv"
 img_size = (30, 30)
-epochs = 5
+epochs = 10
 batch_size = 32
-model_save_path = "models/traffic_signs_model.h5"
+model_save_path = "models/traffic_signs_model_v2.h5"
 
 def main():
     # Caricamento e preprocessing del dataset
