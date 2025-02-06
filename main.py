@@ -6,30 +6,39 @@ from plot_metrics import plot_training_history
 import os
 
 # Configurazione
-train_data_path = "Train"
-test_data_path = "Test"
-test_labels_path = "Test.csv"
+train_data_path = "../MoodRipple"
+test_data_path = "../MoodRipple"
+test_labels_path = "Dataset/Test.csv"
+train_labels_path = "Dataset/Train.csv"
 img_size = (30, 30)
-epochs = 30
+epochs = 5
 batch_size = 32
 model_save_path = "models/traffic_signs_model.h5"
 
-# Caricamento e preprocessing del dataset
-train_images, train_labels = load_data(test_data_path, test_labels_path, img_size)
-train_images, val_images, train_labels, val_labels = split_data(train_images, train_labels)
+def main():
+    # Caricamento e preprocessing del dataset
+    train_images, train_labels = load_data(train_labels_path, train_data_path, img_size)
+    train_images, val_images, train_labels, val_labels = split_data(train_images, train_labels)
 
-# Creazione del modello
-model = create_model(input_shape=(img_size[0], img_size[1], 3), num_classes=train_labels.shape[1])
+    # Caricamento e preprocessing del test set
+    test_images, test_labels = load_data(test_labels_path, test_data_path, img_size)
 
-# Addestramento del modello
-history = train_model(model, train_images, train_labels, val_images, val_labels, epochs, batch_size)
+    # Creazione del modello
+    model = create_model(input_shape=(img_size[0], img_size[1], 3), num_classes=train_labels.shape[1])
 
-# Salvataggio del modello addestrato
-model.save(model_save_path)
-print("Modello salvato con successo!")
+    # Addestramento del modello
+    history = train_model(model, train_images, train_labels, val_images, val_labels, epochs, batch_size)
 
-# Valutazione del modello
-evaluate_model(model, val_images, val_labels)
+    # Salvataggio del modello addestrato
+    model.save(model_save_path)
+    print("Modello salvato con successo!")
 
-# Grafici delle metriche
-plot_training_history(history)
+    # Valutazione del modello
+    evaluate_model(model, test_images, test_labels)
+
+    # Grafici delle metriche
+    plot_training_history(history)
+
+if __name__ == "__main__":
+    main()
+
