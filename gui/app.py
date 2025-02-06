@@ -3,10 +3,12 @@ import tensorflow as tf
 import numpy as np
 import cv2
 import os
+
+from sklearn.datasets import images
 from werkzeug.utils import secure_filename
 
 # Caricamento del modello
-model_path = "models/traffic_signs_model_v2.h5"
+model_path = "models/traffic_signs_model_v3.h5"
 model = tf.keras.models.load_model(model_path)
 
 # Dizionario delle classi (preso da data_preprocessing.py)
@@ -27,7 +29,7 @@ classes = {
 
 # Configurazione di Flask
 app = Flask(__name__)
-UPLOAD_FOLDER = "static/uploads"
+UPLOAD_FOLDER = "gui/static/uploads"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
@@ -39,7 +41,7 @@ def preprocess_image(image_path, target_size=(30, 30)):
     return img
 
 # Rotta principale'to upload and predict
-images@app.route('/', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 def upload_predict():
     if request.method == 'POST':
         file = request.files['file']
