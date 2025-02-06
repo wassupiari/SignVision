@@ -1,4 +1,5 @@
 from tensorflow.keras import layers, models
+from tensorflow.keras.preprocessing.image import ImageDataGenerator
 
 def create_model(input_shape=(30, 30, 3), num_classes=43):
     """Definisce e restituisce il modello CNN con normalizzazione."""
@@ -31,3 +32,15 @@ def create_model(input_shape=(30, 30, 3), num_classes=43):
 
     model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
     return model
+
+def get_data_augmentation():
+    """Restituisce un generatore di immagini con Data Augmentation."""
+    return ImageDataGenerator(
+        rotation_range=15,
+        width_shift_range=0.1,
+        height_shift_range=0.1,
+        shear_range=0.1,
+        zoom_range=0.1,
+        horizontal_flip=True,
+        fill_mode='nearest'
+    )
