@@ -5,7 +5,7 @@ from tkinter import ttk
 from pathlib import Path
 
 # Percorsi cartelle
-base_dir = Path("datasets")  # Cartella di origine
+base_dir = Path("fer_2/train")  # Cartella di origine
 output_base_dir = Path("test_set")  # Cartella di destinazione
 output_base_dir.mkdir(parents=True, exist_ok=True)
 

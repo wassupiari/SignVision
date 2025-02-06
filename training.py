@@ -1,10 +1,9 @@
-from tensorflow.keras.callbacks import EarlyStopping
-
-def train_model(model, train_generator, validation_generator):
+def train_model(model, train_images, train_labels, val_images, val_labels, epochs=30, batch_size=32):
+    """Addestra il modello CNN e restituisce la history."""
     history = model.fit(
-        train_generator,
-        epochs=30,
-        validation_data=validation_generator,
-        callbacks=[EarlyStopping(monitor='val_loss', patience=5, restore_best_weights=True)]
+        train_images, train_labels,
+        batch_size=batch_size,
+        epochs=epochs,
+        validation_data=(val_images, val_labels)
     )
     return history

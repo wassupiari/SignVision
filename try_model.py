@@ -8,8 +8,8 @@ from tensorflow.keras.preprocessing.image import ImageDataGenerator
 
 # Configurazione percorsi
 model_path = "models/model_2.h5"  # Percorso del modello salvato
-test_data_path = "datasets"  # Percorso del test set
-img_width, img_height = 96, 96  # Dimensioni delle immagini
+test_data_path = "Test"  # Percorso del test set
+img_width, img_height = 30, 30  # Dimensioni delle immagini
 batch_size = 32  # Dimensione batch
 
 # Caricare il modello addestrato
@@ -36,23 +36,22 @@ y_true = test_generator.classes  # Etichette reali
 class_labels = list(test_generator.class_indices.keys())
 
 # Stampare il report di classificazione
-print("\n📊 Report di Classificazione:\n")
+print("\n\U0001F4CA Report di Classificazione:\n")
 print(classification_report(y_true, y_pred, target_names=class_labels))
 
 # Matrice di confusione
 cm = confusion_matrix(y_true, y_pred)
 
 # Visualizzazione della matrice di confusione
-plt.figure(figsize=(10, 8))
+plt.figure(figsize=(12, 10))
 sns.heatmap(cm, annot=True, fmt="d", cmap="Blues", xticklabels=class_labels, yticklabels=class_labels)
 plt.xlabel("Predetto")
 plt.ylabel("Reale")
 plt.title("Matrice di Confusione")
 plt.show()
 
-
-# Funzione per prevedere l'emozione da un'immagine
-def predict_emotion(img_path):
+# Funzione per prevedere il segnale stradale da un'immagine
+def predict_traffic_sign(img_path):
     img = tf.keras.preprocessing.image.load_img(img_path, target_size=(img_width, img_height))
     img_array = tf.keras.preprocessing.image.img_to_array(img)
     img_array = np.expand_dims(img_array, axis=0)
@@ -63,8 +62,7 @@ def predict_emotion(img_path):
 
     return class_labels[predicted_class]
 
-
 # Test su un'immagine specifica
-test_image = "datasets/disgust/ffhq_0.png"  # Sostituisci con il percorso reale
-detected_emotion = predict_emotion(test_image)
-print(f"L'emozione predetta per {test_image} è: {detected_emotion}")
+test_image = "resized_image.png"  # Sostituisci con il percorso reale
+detected_sign = predict_traffic_sign(test_image)
+print(f"Il segnale stradale predetto per {test_image} è: {detected_sign}")
