@@ -22,14 +22,20 @@
             <li><a href="#">Service</a> </li>
         </ul>
     </nav>
-    <div class="dashboard">
-        <h1>📊 Dashboard Analitica</h1>
-        <p>Analizza le performance del modello attraverso i dati raccolti.</p>
+    <div class="container">
+        <h1>🚗 Riconoscimento Segnali Stradali 🛣️</h1>
+        <p>Carica un'immagine di un segnale stradale per ottenere una classificazione automatica.</p>
 
-            <h2>Matrice di Confusione</h2>
-            <img class="grafico-img grande" src="{{ url_for('static', filename='grafici/matrice_confusione.png') }}" alt="Matrice di Confusione">
-            <h2>Andamento dell'Apprendimento</h2>
-            <img class="grafico-img" src="{{ url_for('static', filename='grafici/andamento_apprendimento.png') }}" alt="Grafico Apprendimento">
+        <form action="/" method="post" enctype="multipart/form-data">
+            <input type="file" name="file" accept="image/*" required>
+            <button type="submit">🔍 Analizza Segnale</button>
+        </form>
+
+        {% if image %}
+    <h3>Segnale Caricato:</h3>
+    <img src="{{ image }}" alt="Segnale Stradale">
+    <p class="prediction">🛑 {{ prediction }} 🚦</p>
+{% endif %}
     </div>
 </body>
 </html>
