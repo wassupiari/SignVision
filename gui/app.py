@@ -9,7 +9,7 @@ import cv2
 app = Flask(__name__)
 
 # Configurazione della cartella static per salvare le immagini
-UPLOAD_FOLDER = "gui/static/uploads"
+UPLOAD_FOLDER = "static/uploads"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
@@ -53,7 +53,7 @@ def upload_predict():
             print(f"File salvato in: {file_path}")
 
             # Percorso dell'immagine per il rendering in HTML
-            image_url = url_for("uploaded_file", filename=filename)
+            image_url = url_for("static", filename=f"uploads/{filename}")
 
             # Preprocessa l'immagine e fai la predizione
             img = preprocess_image(file_path)
@@ -66,10 +66,9 @@ def upload_predict():
 
     return render_template("index.html", image=None, prediction=None)
 
-# Route per servire i file caricati
-@app.route('/static/uploads/<filename>')
-def uploaded_file(filename):
-    return send_from_directory(app.config["UPLOAD_FOLDER"], filename)
+@app.route("/grafici")
+def grafici():
+    return render_template("grafici.html")
 
 if __name__ == "__main__":
     app.run(debug=True)

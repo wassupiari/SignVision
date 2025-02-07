@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SignVision</title>
+    <title>Dashboard Analitica</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-    <nav>
+   <nav>
         <input type="checkbox" id="check">
         <label for="check" class="checkbtn">
             <i class="fa-solid fa-bars"></i>
@@ -22,14 +22,20 @@
             <li><a href="#">Service</a> </li>
         </ul>
     </nav>
+
     <div class="dashboard">
         <h1>📊 Dashboard Analitica</h1>
         <p>Analizza le performance del modello attraverso i dati raccolti.</p>
 
+        <section class="grafico">
             <h2>Matrice di Confusione</h2>
-            <img class="grafico-img grande" src="{{ url_for('static', filename='grafici/matrice_confusione.png') }}" alt="Matrice di Confusione">
+            <img class="grafico-img" src="{{ url_for('static', filename='grafici/matrice_confusione.png') }}" alt="Matrice di Confusione">
+        </section>
+
+        <section class="grafico">
             <h2>Andamento dell'Apprendimento</h2>
             <img class="grafico-img" src="{{ url_for('static', filename='grafici/andamento_apprendimento.png') }}" alt="Grafico Apprendimento">
+        </section>
     </div>
 </body>
 </html>
