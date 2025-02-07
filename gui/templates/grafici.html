@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Analitica</title>
+    <title>Grafici SignVision</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
@@ -16,8 +16,8 @@
     <img class=logo src="{{ url_for('static', filename='immagini/SignVision.png') }}" alt="SignVision Logo" style="height: 100px;">
 </label>
         <ul>
-            <li><a href="{{ url_for('upload_predict') }}" class="active">Home</a></li>
-            <li><a href="{{ url_for('grafici') }}">Grafici</a></li>
+            <li><a href="{{ url_for('upload_predict') }}" >Home</a></li>
+            <li><a href="{{ url_for('grafici') }}"class="active">Grafici</a></li>
             <li><a href="#">Contact</a></li>
             <li><a href="#">Service</a> </li>
         </ul>
@@ -27,12 +27,9 @@
         <h1>📊 Dashboard Analitica</h1>
         <p>Analizza le performance del modello attraverso i dati raccolti.</p>
 
-        <section class="grafico">
+        <section class="grafico-container">
             <h2>Matrice di Confusione</h2>
-            <img class="grafico-img" src="{{ url_for('static', filename='grafici/matrice_confusione.png') }}" alt="Matrice di Confusione">
-        </section>
-
-        <section class="grafico">
+            <img class="grafico-img grande" src="{{ url_for('static', filename='grafici/matrice_confusione.png') }}" alt="Matrice di Confusione">
             <h2>Andamento dell'Apprendimento</h2>
             <img class="grafico-img" src="{{ url_for('static', filename='grafici/andamento_apprendimento.png') }}" alt="Grafico Apprendimento">
         </section>
