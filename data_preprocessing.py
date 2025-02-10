@@ -5,6 +5,7 @@ import cv2
 import tensorflow as tf
 from sklearn.model_selection import train_test_split
 from tensorflow.keras.utils import to_categorical
+from tensorflow.keras.preprocessing.image import ImageDataGenerator
 
 # Dizionario delle classi
 classes = {
@@ -29,24 +30,23 @@ def load_data(csv_file, data_dir, img_size=(30, 30)):
     labels = []
 
     for i in range(data.shape[0]):
-        img_path = os.path.normpath(os.path.join(data_dir, str(data.iloc[i]['Path']).strip().replace('Train/Train/', 'Train/').replace('Test/Test/', 'Test/'))).replace('\'', '/')
+        img_path = os.path.normpath(os.path.join(data_dir, str(data.iloc[i]['Path']).strip())).replace('\\', '/')
 
         if not os.path.exists(img_path):
             print(f"[WARNING] Immagine non trovata: {img_path}")
-            continue  # Salta l'immagine
+            continue
 
         img = cv2.imread(img_path)
         if img is None:
             print(f"[WARNING] Impossibile leggere l'immagine: {img_path}")
-            continue  # Salta l'immagine non valida
+            continue
 
-        # Ritaglio ROI
         x1, y1, x2, y2 = data.iloc[i]['Roi.X1'], data.iloc[i]['Roi.Y1'], data.iloc[i]['Roi.X2'], data.iloc[i]['Roi.Y2']
-        img = img[y1:y2, x1:x2]  # Ritaglio dell'immagine
-        img = cv2.resize(img, img_size)  # Ridimensionamento
+        img = img[y1:y2, x1:x2]
+        img = cv2.resize(img, img_size)
 
         images.append(img)
-        labels.append(data.iloc[i]['ClassId'])  # Colonna con l'etichetta
+        labels.append(data.iloc[i]['ClassId'])
 
     images = np.array(images) / 255.0  # Normalizzazione
     labels = to_categorical(np.array(labels), num_classes=len(classes))
@@ -57,3 +57,22 @@ def load_data(csv_file, data_dir, img_size=(30, 30)):
 def split_data(images, labels, test_size=0.2, random_state=42):
     """Divide il dataset in training e validation set."""
     return train_test_split(images, labels, test_size=test_size, random_state=random_state, stratify=labels)
+
+
+def get_data_generators(train_images, train_labels, val_images, val_labels, batch_size=32):
+    """Restituisce generatori di immagini per il training e validation set."""
+    train_datagen = ImageDataGenerator(
+        rotation_range=15,
+        width_shift_range=0.3,
+        height_shift_range=0.3,
+        shear_range=0.1,
+        zoom_range=0.1,
+        horizontal_flip=False,
+        fill_mode='nearest'
+    )
+    val_datagen = ImageDataGenerator()
+
+    train_generator = train_datagen.flow(train_images, train_labels, batch_size=batch_size)
+    val_generator = val_datagen.flow(val_images, val_labels, batch_size=batch_size)
+
+    return train_generator, val_generator

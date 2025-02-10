@@ -1,22 +1,19 @@
-from model import get_data_augmentation
 
+from tensorflow.keras.callbacks import EarlyStopping, ReduceLROnPlateau
 
-def train_model(model, train_images, train_labels, val_images, val_labels, epochs=30, batch_size=32):
+def train_model(model, train_generator, val_generator, epochs=30, batch_size=32):
     """Addestra il modello CNN con Data Augmentation e restituisce la history."""
 
-    # Otteniamo il generatore di immagini con Data Augmentation
-    train_datagen = get_data_augmentation()
+    # Callback per prevenire overfitting
+    early_stopping = EarlyStopping(monitor='val_loss', patience=5, restore_best_weights=True)
+    reduce_lr = ReduceLROnPlateau(monitor='val_loss', factor=0.5, patience=3, min_lr=1e-6)
 
-    # Creiamo il generatore di immagini per il set di training
-    train_generator = train_datagen.flow(
-        train_images, train_labels, batch_size=batch_size
-    )
-
-    # Addestramento del modello con il generatore
+    # Addestramento del modello con i generatori
     history = model.fit(
         train_generator,
         epochs=epochs,
-        validation_data=(val_images, val_labels)
+        validation_data=val_generator,
+        callbacks=[early_stopping, reduce_lr]  # Aggiunto early stopping e riduzione LR
     )
 
     return history
