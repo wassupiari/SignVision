@@ -19,9 +19,8 @@ SignVision è un modello basato su Reti Neurali Convoluzionali ([CNN](https://en
 
 ---
 
-**Autori**: [Iari Normanno](https://github.com/wassupiari), [Marco Acierno](https://github.com/m4rc00000)<br>
-**Università**: Università degli Studi di Salerno<br>
-**Anno Accademico**: 2024/2025
-=======
-# SignVision
+### **Autori**: [Iari Normanno](https://github.com/wassupiari), [Marco Acierno](https://github.com/m4rc00000)<br>
+### **Università**: Università degli Studi di Salerno<br>
+### **Anno Accademico**: 2024/2025
+
 
