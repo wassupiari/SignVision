@@ -26,7 +26,6 @@ pip-log.txt
 pip-delete-this-directory.txt
 
 # Escludi risultati di training (se hai modelli salvati)
-models/
 checkpoints/
 *.h5
 *.pth
