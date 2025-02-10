@@ -5,23 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SignVision</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <script>
+        function togglePredictions() {
+            var hiddenList = document.getElementById("allPredictions");
+            var button = document.getElementById("toggleButton");
+            if (hiddenList.style.display === "none") {
+                hiddenList.style.display = "block";
+                button.textContent = "Nascondi altre probabilità";
+            } else {
+                hiddenList.style.display = "none";
+                button.textContent = "Mostra tutte le probabilità";
+            }
+        }
+    </script>
 </head>
 <body>
-    <nav>
-        <input type="checkbox" id="check">
-        <label for="check" class="checkbtn">
-            <i class="fa-solid fa-bars"></i>
-        </label>
-        <label class="logo">
-    <img class=logo src="{{ url_for('static', filename='immagini/SignVision.png') }}" alt="SignVision Logo" style="height: 100px;">
-</label>
-        <ul>
-            <li><a href="{{ url_for('upload_predict') }}" class="active">Home</a></li>
-            <li><a href="{{ url_for('grafici') }}">Grafici</a></li>
-            <li><a href="#">Contact</a></li>
-            <li><a href="#">Service</a> </li>
+    <!-- Navbar -->
+    <nav class="navbar">
+    <div class="logo">SignVision</div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contatti</a></li>
         </ul>
+        <div class="burger">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
     </nav>
+
+    <!-- Contenitore principale -->
     <div class="container">
         <h1>🚗 Riconoscimento Segnali Stradali 🛣️</h1>
         <p>Carica un'immagine di un segnale stradale per ottenere una classificazione automatica.</p>
@@ -31,11 +45,28 @@
             <button type="submit">🔍 Analizza Segnale</button>
         </form>
 
+        <!-- Se viene caricata un'immagine -->
         {% if image %}
-    <h3>Segnale Caricato:</h3>
-    <img src="{{ image }}" alt="Segnale Stradale">
-    <p class="prediction">🛑 {{ prediction }} 🚦</p>
-{% endif %}
+            <h3>Segnale Caricato:</h3>
+            <img src="{{ image }}" alt="Segnale Stradale">
+
+            <!-- Predizione principale -->
+            <h3>Predizione Principale:</h3>
+            <p class="best-prediction">🛑 {{ best_prediction[0] }} 🚦</p>
+            <p class="confidence">Probabilità: <strong>{{ best_prediction[1] }}%</strong></p>
+
+            <!-- Pulsante per mostrare tutte le probabilità -->
+            <button id="toggleButton" onclick="togglePredictions()">Mostra tutte le probabilità</button>
+
+            <!-- Lista delle altre probabilità (inizialmente nascosta) -->
+            <ul id="allPredictions" class="prediction-list" style="display: none;">
+                {% for label, percentage in all_predictions %}
+                    <li>{{ label }}: <strong>{{ percentage }}%</strong></li>
+                {% endfor %}
+            </ul>
+        {% endif %}
     </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>

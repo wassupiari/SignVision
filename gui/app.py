@@ -9,12 +9,12 @@ import cv2
 app = Flask(__name__)
 
 # Configurazione della cartella static per salvare le immagini
-UPLOAD_FOLDER = "static/uploads"
+UPLOAD_FOLDER = "../MoodRipple/gui/static/uploads"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
 # Caricamento del modello
-model_path = "models/traffic_signs_model_v3.h5"
+model_path = "models/traffic_signs_model_v7.h5"
 model = tf.keras.models.load_model(model_path)
 
 # Dizionario delle classi
@@ -49,26 +49,32 @@ def upload_predict():
             file_path = os.path.join(app.config["UPLOAD_FOLDER"], filename)
             file.save(file_path)
 
-            # Verifica se il file è stato salvato correttamente
-            print(f"File salvato in: {file_path}")
-
             # Percorso dell'immagine per il rendering in HTML
-            image_url = url_for("static", filename=f"uploads/{filename}")
+            image_url = url_for("static", filename=f"uploads/{filename}") + f"?v={int(os.path.getmtime(file_path))}"
 
             # Preprocessa l'immagine e fai la predizione
             img = preprocess_image(file_path)
-            predictions = model.predict(img)
-            predicted_class = np.argmax(predictions)
-            confidence = np.max(predictions)
-            result = f"Predizione: {classes[predicted_class]} con confidenza {confidence:.2f}"
+            predictions = model.predict(img)[0]  # Ottieni il vettore di probabilità per ogni classe
+            percentages = (predictions * 100).round(2)  # Converti in percentuale
 
-            return render_template("index.html", image=image_url, prediction=result)
+            # Classe più probabile
+            top_prediction = max(enumerate(percentages), key=lambda x: x[1])
+            best_label = classes[top_prediction[0]]
+            best_confidence = top_prediction[1]
 
-    return render_template("index.html", image=None, prediction=None)
+            # Tutte le predizioni ordinate
+            all_predictions = sorted(
+                [(classes[i], percentages[i]) for i in range(len(classes))],
+                key=lambda x: x[1], reverse=True
+            )
 
-@app.route("/grafici")
-def grafici():
-    return render_template("grafici.html")
+            return render_template(
+                "index.html", image=image_url, best_prediction=(best_label, best_confidence), all_predictions=all_predictions
+            )
+
+    return render_template("index.html", image=None, best_prediction=None, all_predictions=None)
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)
