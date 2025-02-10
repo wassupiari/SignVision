@@ -14,7 +14,7 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
 # Caricamento del modello
-model_path = "models/traffic_signs_model_v7.h5"
+model_path = "models/20_epoche/model.h5"
 model = tf.keras.models.load_model(model_path)
 
 # Dizionario delle classi

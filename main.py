@@ -11,9 +11,9 @@ dir = "../MoodRipple/gtsrb-german-traffic-sign"
 test_labels_path = "../MoodRipple/gtsrb-german-traffic-sign/Test.csv"
 train_labels_path = "../MoodRipple/gtsrb-german-traffic-sign/Train.csv"
 img_size = (30, 30)
-epochs = 15
+epochs = 5
 batch_size = 128
-model_save_path = "models/traffic_signs_model_v7.h5"
+model_save_path = "models/5_epoche/model.h5"
 
 def main():
     # Caricamento e preprocessing del dataset
@@ -37,8 +37,9 @@ def main():
     test_images, test_labels = load_data(test_labels_path, dir, img_size)
     evaluate_model(model, test_images, test_labels)
 
+
     # Grafici delle metriche
-    plot_training_history(history)
+    plot_training_history(history, model, test_images, test_labels)
 
 if __name__ == "__main__":
     main()
