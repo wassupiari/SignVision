@@ -51,8 +51,8 @@ def predict_images_in_folder(model_path, folder_path, csv_path, img_size=(30, 30
 # Esempio di utilizzo
 if __name__ == "__main__":
     model_path = "models/traffic_signs_model_v3.h5"
-    folder_path = "../MoodRipple/gtsrb-german-traffic-sign/Meta/"  # Modifica con il percorso della cartella
-    csv_path = "../MoodRipple/gtsrb-german-traffic-sign/Meta.csv"  # Modifica con il percorso del CSV
+    folder_path = "../SignVision/gtsrb-german-traffic-sign/Meta/"  # Modifica con il percorso della cartella
+    csv_path = "../SignVision/gtsrb-german-traffic-sign/Meta.csv"  # Modifica con il percorso del CSV
     results = predict_images_in_folder(model_path, folder_path, csv_path)
 
     for filename, prediction, confidence, correct in results:

@@ -9,7 +9,7 @@ import cv2
 app = Flask(__name__)
 
 # Configurazione della cartella static per salvare le immagini
-UPLOAD_FOLDER = "../MoodRipple/gui/static/uploads"
+UPLOAD_FOLDER = "../SignVision/gui/static/uploads"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
