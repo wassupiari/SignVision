@@ -70,7 +70,13 @@ def get_data_generators(train_images, train_labels, val_images, val_labels, batc
         horizontal_flip=False,
         fill_mode='nearest'
     )
-    val_datagen = ImageDataGenerator()
+    val_datagen = ImageDataGenerator(rotation_range=15,
+        width_shift_range=0.3,
+        height_shift_range=0.3,
+        shear_range=0.1,
+        zoom_range=0.1,
+        horizontal_flip=False,
+        fill_mode='nearest')
 
     train_generator = train_datagen.flow(train_images, train_labels, batch_size=batch_size)
     val_generator = val_datagen.flow(val_images, val_labels, batch_size=batch_size)

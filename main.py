@@ -1,4 +1,4 @@
-import data_preprocessing
+from data_preprocessing import load_data, split_data, get_data_generators
 from model import create_model
 from training import train_model
 from evaluation import evaluate_model
@@ -12,22 +12,18 @@ dir = "../MoodRipple/gtsrb-german-traffic-sign"
 test_labels_path = "../MoodRipple/gtsrb-german-traffic-sign/Test.csv"
 train_labels_path = "../MoodRipple/gtsrb-german-traffic-sign/Train.csv"
 img_size = (30, 30)
-epochs = 20
+epochs = 15
 batch_size = 128
-model_save_path = "models/20_epoche/model.h5"
+model_save_path = "models/15_epoche/model.h5"
 
 def main():
     # Caricamento e preprocessing del dataset prima e dopo il bilanciamento
-    train_images_balanced, train_labels_balanced = data_preprocessing.load_data(train_labels_path, dir)
-    test_images, test_labels = data_preprocessing.load_data(test_labels_path, dir)
+    train_images, train_labels = load_data(train_labels_path, dir, img_size)
+    train_images, val_images, train_labels, val_labels = split_data(train_images, train_labels)
 
-
-
-    # Suddivisione in training e validation
-    train_images, val_images, train_labels, val_labels = data_preprocessing.split_data(train_images_balanced, train_labels_balanced)
-
+    test_images, test_labels = load_data(test_labels_path, dir, img_size)
     # Creazione dei generatori
-    train_generator, val_generator = data_preprocessing.get_data_generators(train_images, train_labels, val_images, val_labels, batch_size)
+    train_generator, val_generator = get_data_generators(train_images, train_labels, val_images, val_labels, batch_size)
 
     # Calcolo dei pesi delle classi per bilanciare il training
     y_train = np.argmax(train_labels, axis=1)
@@ -38,7 +34,7 @@ def main():
     print("[INFO] Pesi delle classi calcolati in main.py:", class_weights)
 
     # Creazione del modello
-    model = create_model(input_shape=(None,None, 3), num_classes=num_classes)
+    model = create_model(input_shape=(img_size[0], img_size[1], 3), num_classes=train_labels.shape[1])
 
     # Addestramento del modello con pesi delle classi calcolati
     history = train_model(model, train_generator, val_generator, num_classes, epochs, class_weights=class_weights)

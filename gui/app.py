@@ -14,7 +14,7 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
 # Caricamento del modello
-model_path = "models/15_epoche/model.h5"
+model_path = "models/20_epoche/model.h5"
 model = tf.keras.models.load_model(model_path)
 
 # Dizionario delle classi
@@ -34,7 +34,7 @@ classes = {
 }
 
 # Funzione di preprocessing per le immagini
-def preprocess_image(image_path, target_size=(50, 50)):
+def preprocess_image(image_path, target_size=(30, 30)):
     img = cv2.imread(image_path)
     img = cv2.resize(img, target_size)
     img = np.expand_dims(img, axis=0) / 255.0  # Normalizzazione
