@@ -1,26 +1,42 @@
 from tensorflow.keras import layers, models, Sequential
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
+from tensorflow.keras import optimizers
+import tensorflow as tf
+
+import tensorflow as tf
+from tensorflow.keras import layers, Sequential
 
 
-
-def create_model(input_shape=(30, 30, 3), num_classes=43):
+def create_model(input_shape=(None, None, 3), num_classes=43):
     """Definisce e restituisce il modello CNN con normalizzazione e regolarizzazione."""
     model = Sequential()
     model.add(layers.Conv2D(filters=32, kernel_size=(5, 5), activation='relu', input_shape=input_shape))
+    model.add(layers.BatchNormalization())
     model.add(layers.Conv2D(filters=64, kernel_size=(5, 5), activation='relu'))
+    model.add(layers.BatchNormalization())
     model.add(layers.MaxPool2D(pool_size=(2, 2)))
     model.add(layers.Dropout(rate=0.15))
     model.add(layers.Conv2D(filters=128, kernel_size=(3, 3), activation='relu'))
+    model.add(layers.BatchNormalization())
     model.add(layers.Conv2D(filters=256, kernel_size=(3, 3), activation='relu'))
+    model.add(layers.BatchNormalization())
     model.add(layers.MaxPool2D(pool_size=(2, 2)))
     model.add(layers.Dropout(rate=0.20))
-    model.add(layers.Flatten())
+
+    # Sostituiamo Flatten con GlobalAveragePooling2D per input dinamici
+    model.add(layers.GlobalAveragePooling2D())
+
     model.add(layers.Dense(512, activation='relu'))
+    model.add(layers.BatchNormalization())
     model.add(layers.Dropout(rate=0.25))
     model.add(layers.Dense(num_classes, activation='softmax'))
 
-    model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
+    model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=0.001),
+                  loss="categorical_crossentropy",
+                  metrics=["accuracy"])
+
     return model
+
 
 def get_data_augmentation():
     """Restituisce un generatore di immagini con Data Augmentation."""
