@@ -12,9 +12,9 @@ dir = "../MoodRipple/gtsrb-german-traffic-sign"
 test_labels_path = "../MoodRipple/gtsrb-german-traffic-sign/Test.csv"
 train_labels_path = "../MoodRipple/gtsrb-german-traffic-sign/Train.csv"
 img_size = (30, 30)
-epochs = 15
+epochs = 20
 batch_size = 128
-model_save_path = "models/15_epoche/model.h5"
+model_save_path = "models/20_epoche/model.h5"
 
 def main():
     # Caricamento e preprocessing del dataset prima e dopo il bilanciamento
