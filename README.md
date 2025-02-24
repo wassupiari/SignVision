@@ -84,6 +84,6 @@ Il modello ha ottenuto un'accuratezza di **96%** sul test set.
 
 ---
 
-## 👨‍💻 **Autori**: [Iari Normanno](https://github.com/wassupiari), [Marco Acierno](https://github.com/m4rc00000)<br>
-### **Università**: Università degli Studi di Salerno<br>
-### **Anno Accademico**: 2024/2025
+#### 👨‍💻 **Autori**: [Iari Normanno](https://github.com/wassupiari), [Marco Acierno](https://github.com/m4rc00000)
+##### Università degli Studi di Salerno
+##### **Anno Accademico**: 2024/2025
